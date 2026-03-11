@@ -1,0 +1,1168 @@
+/* ================================================================
+   w a r m   e m p t i n e s s
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ================================================================
+   I.  DESIGN TOKENS
+   ================================================================ */
+
+:root {
+  /* -- Accent palette (sakura pink) -- */
+  --warm-red: 242, 181, 195;
+  --warm-rose: 247, 200, 211;
+  --warm-blush: 255, 220, 230;
+  --warm-crimson: 220, 150, 168;
+  --warm-ember: 235, 170, 185;
+
+  /* -- Deep black surfaces -- */
+  --warm-deep: 9, 9, 9;
+  --warm-deeper: 7, 7, 7;
+  --warm-deepest: 0, 0, 0;
+
+  /* -- Surface tints -- */
+  --warm-surface-1: rgba(255, 255, 255, 0.03);
+  --warm-surface-2: rgba(255, 255, 255, 0.05);
+  --warm-surface-3: rgba(255, 255, 255, 0.08);
+  --warm-surface-hover: rgba(var(--warm-red), 0.07);
+  --warm-surface-active: rgba(var(--warm-red), 0.12);
+
+  /* -- Borders -- */
+  --warm-border-faint: rgba(255, 255, 255, 0.04);
+  --warm-border-subtle: rgba(255, 255, 255, 0.07);
+  --warm-border-accent: rgba(var(--warm-red), 0.2);
+  --warm-border-glow: rgba(var(--warm-red), 0.35);
+
+  /* -- Glow & shadows -- */
+  --warm-glow-sm: 0 0 8px rgba(var(--warm-red), 0.2);
+  --warm-glow-md: 0 0 16px rgba(var(--warm-red), 0.2);
+  --warm-glow-lg: 0 4px 30px rgba(var(--warm-red), 0.15);
+  --warm-shadow-sm: 0 2px 8px rgba(var(--warm-deepest), 0.4);
+  --warm-shadow-md: 0 4px 16px rgba(var(--warm-deepest), 0.5);
+  --warm-shadow-lg: 0 8px 40px rgba(var(--warm-deepest), 0.6);
+  --warm-shadow-xl: 0 16px 64px rgba(var(--warm-deepest), 0.7);
+
+  /* -- Gradients -- */
+  --warm-grad-accent: linear-gradient(135deg, rgb(var(--warm-red)), rgb(var(--warm-crimson)));
+  --warm-grad-accent-h: linear-gradient(90deg, rgb(var(--warm-red)), rgb(var(--warm-crimson)));
+  --warm-grad-surface: linear-gradient(180deg, rgba(var(--warm-red), 0.06), transparent);
+  --warm-grad-radial: radial-gradient(ellipse at 30% 0%, rgba(var(--warm-crimson), 0.08), transparent 60%);
+  --warm-grad-warm: linear-gradient(180deg, rgba(var(--warm-red), 0.04) 0%, transparent 40%);
+
+  /* -- Motion -- */
+  --warm-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --warm-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --warm-speed-fast: 0.15s;
+  --warm-speed: 0.25s;
+  --warm-speed-slow: 0.4s;
+
+  /* -- Radius -- */
+  --warm-radius-sm: 6px;
+  --warm-radius-md: 10px;
+  --warm-radius-lg: 14px;
+  --warm-radius-xl: 20px;
+  --warm-radius-pill: 100px;
+}
+
+
+/* ================================================================
+   II. TYPOGRAPHY
+   ================================================================ */
+
+* {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+h1, h2, h3,
+[class*="Type__TypeElement"] {
+  letter-spacing: -0.01em !important;
+}
+
+.main-entityHeader-title h1,
+.main-shelf-title {
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+}
+
+span, p, a, div {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+
+/* ================================================================
+   III. GLOBAL BACKGROUND & NOISE TEXTURE
+   ================================================================ */
+
+body {
+  background-color: var(--spice-main) !important;
+}
+
+/* Subtle noise overlay for depth */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+
+/* ================================================================
+   IV. SIDEBAR
+   ================================================================ */
+
+.Root__nav-bar,
+.LayoutResizer__resize-bar {
+  background: var(--spice-sidebar) !important;
+}
+
+.Root__nav-bar {
+  border-right: 1px solid var(--warm-border-faint) !important;
+}
+
+.main-navBar-navBar {
+  background: transparent !important;
+  padding: 8px !important;
+  gap: 2px !important;
+}
+
+.main-navBar-navBarLink {
+  border-radius: var(--warm-radius-md) !important;
+  padding: 10px 16px !important;
+  transition: background var(--warm-speed) var(--warm-ease),
+              color var(--warm-speed) var(--warm-ease) !important;
+}
+
+.main-navBar-navBarLink:hover {
+  background: var(--warm-surface-hover) !important;
+}
+
+.main-navBar-navBarLink.active {
+  background: var(--warm-surface-active) !important;
+  color: var(--spice-text) !important;
+}
+
+/* Library */
+.main-yourLibraryX-libraryContainer,
+.main-yourLibraryX-libraryRootlist {
+  background: transparent !important;
+}
+
+.main-yourLibraryX-listItem {
+  border-radius: var(--warm-radius-sm) !important;
+  transition: background var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-yourLibraryX-listItem:hover {
+  background: var(--warm-surface-hover) !important;
+}
+
+/* Library filter chips */
+.main-yourLibraryX-filterArea button {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-faint) !important;
+  border-radius: var(--warm-radius-pill) !important;
+  color: var(--spice-subtext) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-yourLibraryX-filterArea button:hover {
+  background: var(--warm-surface-3) !important;
+  color: var(--spice-text) !important;
+}
+
+.main-yourLibraryX-filterArea button[aria-checked="true"],
+.main-yourLibraryX-filterArea button.active {
+  background: rgba(var(--warm-red), 0.15) !important;
+  border-color: var(--warm-border-accent) !important;
+  color: rgb(var(--warm-rose)) !important;
+}
+
+.LayoutResizer__input {
+  background: transparent !important;
+}
+
+.LayoutResizer__input:hover {
+  background: rgba(var(--warm-red), 0.3) !important;
+}
+
+.main-navBar-navBarFooter {
+  border-top: 1px solid var(--warm-border-faint) !important;
+}
+
+
+/* ================================================================
+   V.  TOP BAR / NAVIGATION
+   ================================================================ */
+
+.main-topBar-container {
+  background: transparent !important;
+  padding: 12px 16px !important;
+}
+
+/* Scrolled — frosted glass */
+.main-topBar-container[style*="background-color"],
+.main-topBar-background {
+  background: rgba(9, 9, 9, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  border-bottom: 1px solid var(--warm-border-faint) !important;
+}
+
+.main-topBar-historyButtons button {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-faint) !important;
+  color: var(--spice-subtext) !important;
+  border-radius: 50% !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-topBar-historyButtons button:hover {
+  background: var(--warm-surface-3) !important;
+  color: var(--spice-text) !important;
+  border-color: var(--warm-border-subtle) !important;
+}
+
+.main-topBar-container button[data-testid="user-widget-link"] {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-faint) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-topBar-container button[data-testid="user-widget-link"]:hover {
+  border-color: var(--warm-border-accent) !important;
+  box-shadow: var(--warm-glow-sm) !important;
+}
+
+.main-topBar-container .encore-over-media-set button {
+  border-radius: var(--warm-radius-pill) !important;
+}
+
+
+/* ================================================================
+   VI. MAIN CONTENT AREA
+   ================================================================ */
+
+.Root__main-view {
+  background: var(--spice-main) !important;
+}
+
+.main-shelf-title {
+  color: var(--spice-text) !important;
+}
+
+.main-shelf-title a:hover {
+  color: rgb(var(--warm-rose)) !important;
+}
+
+.main-shelf-seeAll {
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  transition: color var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-shelf-seeAll:hover {
+  color: rgb(var(--warm-rose)) !important;
+}
+
+
+/* ================================================================
+   VII. CARDS
+   ================================================================ */
+
+.main-card-card {
+  background: var(--spice-card) !important;
+  border: 1px solid var(--warm-border-faint) !important;
+  border-radius: var(--warm-radius-md) !important;
+  box-shadow: var(--warm-shadow-sm) !important;
+  transition: all var(--warm-speed) var(--warm-ease) !important;
+  overflow: hidden !important;
+}
+
+.main-card-card:hover {
+  background: rgba(18, 18, 18, 0.95) !important;
+  border-color: var(--warm-border-accent) !important;
+  box-shadow: var(--warm-glow-lg) !important;
+  transform: translateY(-3px) !important;
+}
+
+.main-card-card .main-cardImage-imageWrapper {
+  border-radius: var(--warm-radius-sm) !important;
+  overflow: hidden !important;
+}
+
+.main-card-card:hover .main-cardImage-imageWrapper {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.main-card-card .main-image-image {
+  transition: transform var(--warm-speed-slow) var(--warm-ease) !important;
+}
+
+.main-card-card:hover .main-image-image {
+  transform: scale(1.03) !important;
+}
+
+/* Card play button */
+.main-card-PlayButtonContainer button,
+.main-card-card button[data-testid="play-button"] {
+  background-color: rgb(var(--warm-red)) !important;
+  color: #0a0a0a !important;
+  box-shadow: var(--warm-shadow-md) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease-bounce) !important;
+}
+
+.main-card-PlayButtonContainer button:hover,
+.main-card-card button[data-testid="play-button"]:hover {
+  transform: scale(1.08) !important;
+  background-color: rgb(var(--warm-rose)) !important;
+  box-shadow: var(--warm-glow-md) !important;
+}
+
+.main-card-card .main-cardHeader-text {
+  color: var(--spice-text) !important;
+}
+
+.main-card-card .main-cardSubHeader-root {
+  color: var(--spice-subtext) !important;
+}
+
+.main-card-card:hover .main-cardHeader-link {
+  color: rgb(var(--warm-blush)) !important;
+}
+
+
+/* ================================================================
+   VIII. GENRE / BROWSE CARDS
+   ================================================================ */
+
+.main-cardImage-imagePlaceholder,
+[data-testid="genre-card"] {
+  border-radius: var(--warm-radius-md) !important;
+  overflow: hidden !important;
+}
+
+
+/* ================================================================
+   IX. TRACK LIST
+   ================================================================ */
+
+.main-trackList-trackListHeaderRow {
+  border-bottom: 1px solid var(--warm-border-faint) !important;
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Column separators */
+[aria-label="Resize columns"] {
+  background: transparent !important;
+  border: none !important;
+  width: 1px !important;
+  min-width: 1px !important;
+  max-width: 1px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+[aria-label="Resize columns"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 20% !important;
+  bottom: 20% !important;
+  left: 0 !important;
+  width: 1px !important;
+  background: var(--warm-border-subtle) !important;
+  transition: background var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+[aria-label="Resize columns"]:hover::after {
+  background: rgba(var(--warm-red), 0.4) !important;
+}
+
+.main-trackList-trackListRow {
+  border-radius: var(--warm-radius-sm) !important;
+  transition: background var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-trackList-trackListRow:hover {
+  background: var(--warm-surface-hover) !important;
+}
+
+.main-trackList-trackListRow.main-trackList-active,
+.main-trackList-trackListRow[aria-selected="true"] {
+  background: var(--warm-surface-active) !important;
+}
+
+.main-trackList-playingIcon {
+  color: rgb(var(--warm-red)) !important;
+}
+
+.main-trackList-active .main-trackList-trackListRowName,
+[class*="trackListRow"] [data-encore-id="text"][style*="color"] {
+  color: rgb(var(--warm-rose)) !important;
+}
+
+.main-trackList-rowSectionIndex,
+.main-trackList-rowSectionEnd {
+  color: var(--spice-subtext) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.main-trackList-trackListRow:hover .main-trackList-rowSectionIndex {
+  color: var(--spice-text) !important;
+}
+
+
+/* ================================================================
+   X.  ALBUM / PLAYLIST HEADERS
+   ================================================================ */
+
+.main-entityHeader-backgroundColor,
+.main-entityHeader-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--warm-crimson), 0.15) 0%,
+    var(--spice-main) 100%
+  ) !important;
+}
+
+.main-entityHeader-title h1 {
+  font-weight: 700 !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.main-entityHeader-metaData,
+.main-entityHeader-metaData span,
+.main-entityHeader-metaData a {
+  color: var(--spice-subtext) !important;
+}
+
+.main-entityHeader-metaData a:hover {
+  color: var(--spice-text) !important;
+}
+
+.main-entityHeader-image img {
+  border-radius: var(--warm-radius-md) !important;
+  box-shadow: var(--warm-shadow-lg) !important;
+}
+
+.main-actionBar-ActionBar {
+  padding: 16px 0 16px 16px !important;
+}
+
+.main-actionBar-ActionBar button[data-testid="play-button"],
+.main-actionBar-ActionBar button[data-testid="pause-button"] {
+  background: rgb(var(--warm-red)) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease-bounce) !important;
+}
+
+.main-actionBar-ActionBar button[data-testid="play-button"]:hover,
+.main-actionBar-ActionBar button[data-testid="pause-button"]:hover {
+  background: rgb(var(--warm-rose)) !important;
+  transform: scale(1.05) !important;
+  box-shadow: var(--warm-glow-md) !important;
+}
+
+
+/* ================================================================
+   XI. ARTIST PAGES
+   ================================================================ */
+
+.main-entityHeader-background {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--warm-crimson), 0.2) 0%,
+    var(--spice-main) 90%
+  ) !important;
+}
+
+.main-entityHeader-headerText span[data-testid="monthly-listeners-label"] {
+  color: var(--spice-subtext) !important;
+}
+
+.main-shelf-title[as="h2"] {
+  border-bottom: none !important;
+}
+
+
+/* ================================================================
+   XII. NOW PLAYING BAR
+   ================================================================ */
+
+.Root__now-playing-bar {
+  background: var(--spice-player) !important;
+  border-top: 1px solid var(--warm-border-accent) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Warm glow strip along top edge */
+.Root__now-playing-bar::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--warm-grad-accent-h);
+  opacity: 0.6;
+}
+
+.Root__now-playing-bar .main-image-image {
+  border-radius: var(--warm-radius-sm) !important;
+  box-shadow: var(--warm-shadow-sm) !important;
+  transition: border-radius var(--warm-speed) var(--warm-ease) !important;
+}
+
+.Root__now-playing-bar .main-image-image:hover {
+  border-radius: var(--warm-radius-md) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-link"] {
+  color: var(--spice-text) !important;
+  font-weight: 500 !important;
+  transition: color var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-link"]:hover {
+  color: rgb(var(--warm-rose)) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-info-artist"] {
+  color: var(--spice-subtext) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-info-artist"]:hover {
+  color: rgb(var(--warm-blush)) !important;
+}
+
+/* Progress bar — warm ember gradient */
+.x-progressBar-sliderArea {
+  background: linear-gradient(90deg, rgb(var(--warm-ember)), rgb(var(--warm-crimson))) !important;
+  border-radius: 3px !important;
+}
+
+.x-progressBar-fillColor {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 3px !important;
+  opacity: 1 !important;
+}
+
+/* Progress knob */
+.x-progressBar-sliderArea [role="slider"] div,
+.playback-bar [role="slider"] div {
+  background: #fff !important;
+  border: 2px solid rgb(var(--warm-red)) !important;
+  box-shadow: var(--warm-glow-sm) !important;
+}
+
+/* Volume bar */
+.volume-bar [data-testid="progress-bar"] > div:first-child > div {
+  background: var(--warm-grad-accent-h) !important;
+}
+
+.volume-bar [data-testid="progress-bar"] > div:first-child {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Playback controls */
+.player-controls__buttons button {
+  color: var(--spice-subtext) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.player-controls__buttons button:hover {
+  color: var(--spice-text) !important;
+}
+
+.player-controls__buttons button[aria-checked="true"],
+.player-controls__buttons button.control-button--active {
+  color: rgb(var(--warm-red)) !important;
+}
+
+/* Play/pause button */
+.player-controls__buttons button[data-testid="control-button-playpause"],
+.player-controls button[data-testid="control-button-playpause"] {
+  background: rgb(var(--warm-red)) !important;
+  color: #0a0a0a !important;
+  border-radius: 50% !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease-bounce) !important;
+}
+
+.player-controls__buttons button[data-testid="control-button-playpause"]:hover,
+.player-controls button[data-testid="control-button-playpause"]:hover {
+  background: rgb(var(--warm-rose)) !important;
+  transform: scale(1.06) !important;
+  box-shadow: var(--warm-glow-md) !important;
+}
+
+/* Extra player buttons */
+.main-nowPlayingBar-extraControls button,
+.player-controls__right button {
+  color: var(--spice-subtext) !important;
+  transition: color var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-nowPlayingBar-extraControls button:hover,
+.player-controls__right button:hover {
+  color: var(--spice-text) !important;
+}
+
+.main-nowPlayingBar-extraControls button[aria-checked="true"],
+.player-controls__right button[aria-checked="true"] {
+  color: rgb(var(--warm-red)) !important;
+}
+
+/* Timestamps */
+.playback-bar__progress-time-elapsed,
+.playback-bar__progress-time,
+.playback-bar [class*="progress-bar"] + div {
+  color: var(--spice-subtext) !important;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+
+/* ================================================================
+   XIII. NOW PLAYING VIEW (Right Panel)
+   ================================================================ */
+
+.Root__right-sidebar {
+  background: var(--spice-sidebar) !important;
+  border-left: 1px solid var(--warm-border-faint) !important;
+}
+
+.main-nowPlayingView-coverArt img {
+  border-radius: var(--warm-radius-lg) !important;
+  box-shadow: var(--warm-shadow-lg) !important;
+}
+
+.main-nowPlayingView-sectionHeaderText {
+  color: var(--spice-text) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ================================================================
+   XIV. SEARCH
+   ================================================================ */
+
+.x-searchInput-searchInputInput,
+input[data-testid="search-input"],
+[role="search"] input {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-pill) !important;
+  color: var(--spice-text) !important;
+  padding: 10px 16px 10px 40px !important;
+  transition: all var(--warm-speed) var(--warm-ease) !important;
+}
+
+.x-searchInput-searchInputInput:focus,
+input[data-testid="search-input"]:focus,
+[role="search"] input:focus {
+  background: var(--warm-surface-3) !important;
+  border-color: rgb(var(--warm-red)) !important;
+  box-shadow: 0 0 0 3px rgba(var(--warm-red), 0.12) !important;
+  outline: none !important;
+}
+
+.x-searchInput-searchInputInput::placeholder,
+input[data-testid="search-input"]::placeholder {
+  color: var(--spice-subtext) !important;
+  opacity: 0.6 !important;
+}
+
+[role="search"] ~ div button,
+.search-searchCategory-catergoryButton {
+  border-radius: var(--warm-radius-pill) !important;
+}
+
+
+/* ================================================================
+   XV. QUEUE
+   ================================================================ */
+
+.main-queue-queue {
+  background: transparent !important;
+}
+
+.main-queue-queueItem {
+  border-radius: var(--warm-radius-sm) !important;
+  transition: background var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-queue-queueItem:hover {
+  background: var(--warm-surface-hover) !important;
+}
+
+.main-queue-header {
+  color: var(--spice-text) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ================================================================
+   XVI. LYRICS
+   ================================================================ */
+
+.lyrics-lyrics-contentContainer {
+  background: transparent !important;
+}
+
+.lyrics-lyricsContent-lyric {
+  color: rgba(var(--warm-blush), 0.35) !important;
+  font-weight: 400 !important;
+  transition: color var(--warm-speed-slow) var(--warm-ease),
+              font-weight var(--warm-speed-slow) var(--warm-ease),
+              opacity var(--warm-speed-slow) var(--warm-ease) !important;
+}
+
+.lyrics-lyricsContent-lyric.lyrics-lyricsContent-active {
+  color: rgb(var(--warm-blush)) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 24px rgba(var(--warm-red), 0.3) !important;
+}
+
+.lyrics-lyricsContent-lyric:hover {
+  color: rgba(var(--warm-blush), 0.6) !important;
+}
+
+.lyrics-lyrics-background {
+  opacity: 0.15 !important;
+}
+
+
+/* ================================================================
+   XVII. CONTEXT MENUS
+   ================================================================ */
+
+.main-contextMenu-menu,
+[data-depth] > ul,
+[role="menu"] {
+  background: rgba(12, 12, 12, 0.94) !important;
+  backdrop-filter: blur(24px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3) !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-md) !important;
+  box-shadow: var(--warm-shadow-xl) !important;
+  padding: 4px !important;
+  overflow-y: visible !important;
+}
+
+.main-contextMenu-menuItemButton,
+[role="menuitem"] {
+  border-radius: var(--warm-radius-sm) !important;
+  padding: 8px 12px !important;
+  transition: background var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-contextMenu-menuItemButton:hover,
+[role="menuitem"]:hover,
+[role="menuitem"]:focus {
+  background: var(--warm-surface-hover) !important;
+}
+
+.main-contextMenu-divider,
+[role="separator"] {
+  background: var(--warm-border-faint) !important;
+  margin: 4px 8px !important;
+}
+
+
+/* ================================================================
+   XVIII. MODALS & DIALOGS
+   ================================================================ */
+
+[role="dialog"],
+.GenericModal,
+.main-trackCreditsModal-container {
+  background: rgba(12, 12, 12, 0.96) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-lg) !important;
+  box-shadow: var(--warm-shadow-xl) !important;
+}
+
+[data-overlayscrollbars-viewport] ~ div[style*="opacity"],
+.GenericModal__overlay {
+  background: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.main-editPlaylistModal-content {
+  background: rgba(12, 12, 12, 0.98) !important;
+  border-radius: var(--warm-radius-lg) !important;
+}
+
+
+/* ================================================================
+   XIX. SCROLLBARS
+   ================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--warm-red), 0.15) !important;
+  border-radius: 3px !important;
+  transition: background 0.2s !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--warm-red), 0.3) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+
+/* ================================================================
+   XX. BUTTONS
+   ================================================================ */
+
+/* Primary */
+button[data-encore-id="buttonPrimary"],
+button.main-buttons-button.main-button-primary {
+  background: rgb(var(--warm-red)) !important;
+  color: #0a0a0a !important;
+  border: none !important;
+  border-radius: var(--warm-radius-pill) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: var(--warm-shadow-sm) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+button[data-encore-id="buttonPrimary"]:hover,
+button.main-buttons-button.main-button-primary:hover {
+  background: rgb(var(--warm-rose)) !important;
+  box-shadow: var(--warm-glow-md) !important;
+  transform: translateY(-1px) !important;
+}
+
+button[data-encore-id="buttonPrimary"]:active,
+button.main-buttons-button.main-button-primary:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Secondary */
+button[data-encore-id="buttonSecondary"],
+button.main-buttons-button.main-button-secondary {
+  background: transparent !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-pill) !important;
+  color: var(--spice-text) !important;
+  font-weight: 500 !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+button[data-encore-id="buttonSecondary"]:hover,
+button.main-buttons-button.main-button-secondary:hover {
+  border-color: rgb(var(--warm-red)) !important;
+  color: rgb(var(--warm-rose)) !important;
+  background: rgba(var(--warm-red), 0.06) !important;
+}
+
+/* Tertiary */
+button[data-encore-id="buttonTertiary"] {
+  color: var(--spice-subtext) !important;
+  transition: color var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+button[data-encore-id="buttonTertiary"]:hover {
+  color: var(--spice-text) !important;
+}
+
+/* Icon buttons */
+button[data-encore-id="buttonIcon"] {
+  color: var(--spice-subtext) !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+button[data-encore-id="buttonIcon"]:hover {
+  color: var(--spice-text) !important;
+  background: var(--warm-surface-hover) !important;
+}
+
+
+/* ================================================================
+   XXI. HEART / SAVE BUTTON
+   ================================================================ */
+
+button[data-testid="add-button"] svg,
+button[aria-label*="Save"] svg,
+button[aria-label*="save"] svg {
+  transition: all var(--warm-speed-fast) var(--warm-ease-bounce) !important;
+}
+
+button[data-testid="add-button"][aria-checked="true"] svg,
+button[aria-label*="Remove from Your Library"] svg {
+  color: rgb(var(--warm-red)) !important;
+}
+
+button[data-testid="add-button"]:hover svg,
+button[aria-label*="Save"]:hover svg,
+button[aria-label*="save"]:hover svg {
+  transform: scale(1.15) !important;
+}
+
+
+/* ================================================================
+   XXII. TOOLTIPS
+   ================================================================ */
+
+[data-tippy-root] .tippy-content,
+[role="tooltip"] {
+  background: rgba(12, 12, 12, 0.96) !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-sm) !important;
+  box-shadow: var(--warm-shadow-md) !important;
+  color: var(--spice-text) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+[data-tippy-root] .tippy-arrow::before {
+  color: rgba(12, 12, 12, 0.96) !important;
+}
+
+
+/* ================================================================
+   XXIII. NOTIFICATIONS
+   ================================================================ */
+
+.main-notification-notification {
+  background: rgba(12, 12, 12, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--warm-border-accent) !important;
+  border-radius: var(--warm-radius-md) !important;
+  box-shadow: var(--warm-glow-lg) !important;
+  color: var(--spice-text) !important;
+}
+
+
+/* ================================================================
+   XXIV. FRIEND ACTIVITY
+   ================================================================ */
+
+.main-buddyFeed-activityFeedContainer {
+  background: var(--spice-sidebar) !important;
+  border-left: 1px solid var(--warm-border-faint) !important;
+}
+
+.main-buddyFeed-buddyFeedItem:hover {
+  background: var(--warm-surface-hover) !important;
+}
+
+
+/* ================================================================
+   XXV. IMAGES
+   ================================================================ */
+
+.main-image-image {
+  border-radius: var(--warm-radius-sm) !important;
+}
+
+[data-testid="cardImage"] .main-image-image[style*="border-radius: 50%"] {
+  border-radius: 50% !important;
+}
+
+.main-nowPlayingView-coverArt .main-image-image {
+  border-radius: var(--warm-radius-lg) !important;
+}
+
+
+/* ================================================================
+   XXVI. CHIPS & TAGS
+   ================================================================ */
+
+.main-chip-chip,
+[class*="chipInner"] {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-faint) !important;
+  border-radius: var(--warm-radius-pill) !important;
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  transition: all var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+.main-chip-chip:hover,
+[class*="chipInner"]:hover {
+  background: var(--warm-surface-3) !important;
+  border-color: var(--warm-border-subtle) !important;
+  color: var(--spice-text) !important;
+}
+
+.main-chip-chip.main-chip-selected,
+.main-chip-chip[aria-checked="true"] {
+  background: rgba(var(--warm-red), 0.18) !important;
+  border-color: var(--warm-border-accent) !important;
+  color: rgb(var(--warm-rose)) !important;
+}
+
+
+/* ================================================================
+   XXVII. INPUT FIELDS
+   ================================================================ */
+
+input[type="text"],
+input[type="search"],
+textarea {
+  background: var(--warm-surface-2) !important;
+  border: 1px solid var(--warm-border-subtle) !important;
+  border-radius: var(--warm-radius-sm) !important;
+  color: var(--spice-text) !important;
+  transition: all var(--warm-speed) var(--warm-ease) !important;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+  border-color: rgb(var(--warm-red)) !important;
+  box-shadow: 0 0 0 3px rgba(var(--warm-red), 0.1) !important;
+  outline: none !important;
+}
+
+
+/* ================================================================
+   XXVIII. CONNECT BAR
+   ================================================================ */
+
+.main-connectBar-connectBar {
+  background: var(--warm-grad-accent-h) !important;
+  border-radius: 0 !important;
+  color: #0a0a0a !important;
+}
+
+
+/* ================================================================
+   XXIX. PODCAST / EPISODES
+   ================================================================ */
+
+.main-episodeProgress-progressBarContainer .progress-bar__fg {
+  background: var(--warm-grad-accent-h) !important;
+}
+
+.main-episodeCard-episodeDescription a {
+  color: rgb(var(--warm-rose)) !important;
+}
+
+.main-episodeCard-episodeDescription a:hover {
+  text-decoration: underline !important;
+}
+
+
+/* ================================================================
+   XXX. ENCORE DESIGN SYSTEM OVERRIDES
+   ================================================================ */
+
+.encore-bright-accent-set,
+.encore-dark-theme,
+.encore-base-set,
+[data-encore-theme] {
+  --background-base: var(--spice-main) !important;
+  --background-highlight: var(--spice-card) !important;
+  --background-press: var(--spice-selected-row) !important;
+  --background-elevated-base: var(--spice-card) !important;
+  --background-elevated-highlight: var(--spice-selected-row) !important;
+  --background-tinted-base: var(--warm-surface-2) !important;
+  --background-tinted-highlight: var(--warm-surface-3) !important;
+  --text-base: var(--spice-text) !important;
+  --text-subdued: var(--spice-subtext) !important;
+  --text-bright-accent: rgb(var(--warm-rose)) !important;
+  --essential-base: var(--spice-text) !important;
+  --essential-subdued: var(--spice-subtext) !important;
+  --essential-bright-accent: rgb(var(--warm-red)) !important;
+  --essential-positive: rgb(var(--warm-red)) !important;
+  --essential-negative: var(--spice-notification-error) !important;
+  --decorative-base: var(--spice-text) !important;
+  --decorative-subdued: var(--spice-subtext) !important;
+}
+
+.encore-bright-accent-set {
+  --background-base: rgb(var(--warm-red)) !important;
+  --background-highlight: rgb(var(--warm-rose)) !important;
+  --text-base: #0a0a0a !important;
+  --essential-base: #0a0a0a !important;
+  color: #0a0a0a !important;
+}
+
+.view-homeShortcutsGrid-PlayButtonContainer,
+.view-homeShortcutsGrid-PlayButtonContainer *,
+.view-homeShortcutsGrid-playButton,
+.view-homeShortcutsGrid-playButton * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+/* ================================================================
+   XXXI. SMOOTH GLOBAL TRANSITIONS
+   ================================================================ */
+
+a, button, input, textarea,
+[role="button"],
+[role="link"],
+[role="tab"],
+[role="menuitem"] {
+  transition: color var(--warm-speed-fast) var(--warm-ease),
+              background-color var(--warm-speed-fast) var(--warm-ease),
+              border-color var(--warm-speed-fast) var(--warm-ease),
+              box-shadow var(--warm-speed-fast) var(--warm-ease),
+              transform var(--warm-speed-fast) var(--warm-ease),
+              opacity var(--warm-speed-fast) var(--warm-ease) !important;
+}
+
+body.loading * {
+  transition: none !important;
+}
+
+
+/* ================================================================
+   XXXII. FOCUS STATES
+   ================================================================ */
+
+*:focus-visible {
+  outline: 2px solid rgba(var(--warm-red), 0.5) !important;
+  outline-offset: 2px !important;
+  border-radius: var(--warm-radius-sm) !important;
+}
+
+
+/* ================================================================
+   XXXIII. SELECTION COLOR
+   ================================================================ */
+
+::selection {
+  background: rgba(var(--warm-red), 0.3) !important;
+  color: #fff !important;
+}
+
+
+/* ================================================================
+   FIN.
+   ================================================================ */
