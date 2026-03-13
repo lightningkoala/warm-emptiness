@@ -37,8 +37,9 @@ A minimal Spicetify theme — deep blacks with soft sakura pink accents.
 
 ## Credits
 
-Inspired by [pink void](https://github.com/0x25CBFC4F/spicetify-pink-void).
+inspo from [pink void](https://github.com/0x25CBFC4F/spicetify-pink-void).
 for claudia <33333
+s/o claude !! 
 ## License
 
 MIT
