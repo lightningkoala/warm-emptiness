@@ -1,0 +1,15 @@
+{
+  "name": "Warm Emptiness",
+  "description": "A minimal theme — deep blacks with soft sakura pink accents",
+  "preview": "preview.png",
+  "readme": "README.md",
+  "usercss": "user.css",
+  "schemes": "color.ini",
+  "authors": [
+    {
+      "name": "lightningkoala",
+      "url": "https://github.com/lightningkoala"
+    }
+  ],
+  "tags": ["dark", "minimal", "pink"]
+}
